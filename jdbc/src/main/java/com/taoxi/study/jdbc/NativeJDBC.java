@@ -32,9 +32,9 @@ public class NativeJDBC {
             }
 
             // 关闭资源
-            conn.close();
             rs.close();
             statement.close();
+            conn.close();
         } catch (ClassNotFoundException e) {
             logger.error("error:", e);
             throw e;
