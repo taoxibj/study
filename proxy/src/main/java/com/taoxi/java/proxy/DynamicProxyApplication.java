@@ -10,4 +10,5 @@ public class DynamicProxyApplication {
         SpringApplication.run(DynamicProxyApplication.class, args);
     }
 
+
 }
