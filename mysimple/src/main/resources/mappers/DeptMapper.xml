@@ -6,7 +6,7 @@
  
 
  <select id="deptFindById" resultType="Dept">
-        select * from dept where deptno=#{deptno}
+        select * from dept where deptno= ?
  </select>
    
    

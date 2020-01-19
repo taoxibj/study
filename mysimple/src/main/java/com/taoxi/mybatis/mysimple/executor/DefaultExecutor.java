@@ -1,8 +1,8 @@
 package com.taoxi.mybatis.mysimple.executor;
 
-import com.sun.deploy.util.ReflectionUtil;
 import com.taoxi.mybatis.mysimple.config.Configuration;
 import com.taoxi.mybatis.mysimple.config.MappedStatement;
+import com.taoxi.mybatis.mysimple.util.ReflectionUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -62,9 +62,9 @@ public class DefaultExecutor implements Executor{
     //对prepareStatement中的占位符进行处理
     private void parameterize(PreparedStatement preparedStatement, Object parameter) throws SQLException {
         if (parameter instanceof Integer) {
-            preparedStatement.setInt(1,(int)parameter);
+            preparedStatement.setInt(1,((Integer) parameter).intValue());
         } else if (parameter instanceof Long) {
-            preparedStatement.setLong(1, (long)parameter);
+            preparedStatement.setLong(1, ((Long) parameter).longValue());
         } else if (parameter instanceof String) {
             preparedStatement.setString(1, (String)parameter);
         }
@@ -83,7 +83,7 @@ public class DefaultExecutor implements Executor{
             while (resultSet.next()) {
                 Object entity = clazz.newInstance();
                 //使用反射工具将resultSet中的数据填充到entity中
-                ReflectionUtil.setPropToBeanFromResultSet(entity, resultSet);
+                ReflectionUtil.setPropToBeanFromResult(entity, resultSet);
                 //对象加入返回集合中
                 ret.add((E)entity);
 
