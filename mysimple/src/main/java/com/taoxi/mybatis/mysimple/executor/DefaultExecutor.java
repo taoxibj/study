@@ -53,9 +53,7 @@ public class DefaultExecutor implements Executor{
             }
         }
 
-
-        System.out.println(ms.getSql());
-        return null;
+        return ret;
     }
 
 

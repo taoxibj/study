@@ -5,7 +5,7 @@
 <mapper namespace="com.taoxi.mybatis.mysimple.mapper.DeptMapper">
  
 
- <select id="deptFindById" resultType="Dept">
+ <select id="deptFindById" resultType="com.taoxi.mybatis.mysimple.entity.Dept">
         select * from dept where deptno= ?
  </select>
    
