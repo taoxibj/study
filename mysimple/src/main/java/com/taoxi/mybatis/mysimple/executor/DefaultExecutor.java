@@ -3,12 +3,16 @@ package com.taoxi.mybatis.mysimple.executor;
 import com.taoxi.mybatis.mysimple.config.Configuration;
 import com.taoxi.mybatis.mysimple.config.MappedStatement;
 import com.taoxi.mybatis.mysimple.util.ReflectionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultExecutor implements Executor{
+
+    private static Logger logger = LoggerFactory.getLogger(DefaultExecutor.class);
 
     private final Configuration configuration;
 
@@ -17,7 +21,7 @@ public class DefaultExecutor implements Executor{
         this.configuration = configuration;
     }
 
-    public <E> List<E> query(MappedStatement ms, Object parameter) {
+    public <E> List<E> query(MappedStatement ms, Object parameter) throws SQLException{
         ArrayList<E> ret = new ArrayList<E>();//定义返回结果集
         try {
             Class.forName(configuration.getJdbcDriver());//加载驱动程序
@@ -42,14 +46,14 @@ public class DefaultExecutor implements Executor{
             handlerResultSet(resultSet, ret, ms.getResultType());
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
         }finally {
             try {
                 resultSet.close();
                 preparedStatement.close();
                 connection.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw e;
             }
         }
 

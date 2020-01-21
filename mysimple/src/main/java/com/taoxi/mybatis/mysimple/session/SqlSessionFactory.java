@@ -40,7 +40,7 @@ public class SqlSessionFactory {
         try {
             properties.load(dbIn);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("load db info error:", e);
         }
         //将数据库配置信息写入configuration对象
         configuration.setJdbcDriver(properties.get("jdbc.driver").toString());
@@ -75,7 +75,7 @@ public class SqlSessionFactory {
         try {
             document = reader.read(file);
         } catch (DocumentException e) {
-            e.printStackTrace();
+            throw new RuntimeException("load mapper info error:", e);
         }
         //获取根节点元素对象<mapper>
         Element root = document.getRootElement();

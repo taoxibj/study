@@ -37,10 +37,13 @@ public class DefaultSqlSession implements SqlSession{
     }
 
     public <E> List<E> selectList(String statement, Object parameter) {
+        try {
+            MappedStatement ms = configuration.getMappedStatments().get(statement);
+            return executor.query(ms, parameter);
+        } catch (Exception e) {
+            throw new RuntimeException("select list error:", e);
+        }
 
-        MappedStatement ms = configuration.getMappedStatments().get(statement);
-
-        return executor.query(ms, parameter);
     }
 
     public <T> T getMapper(Class<T> type) {
