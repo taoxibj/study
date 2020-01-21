@@ -1,9 +1,6 @@
 package com.taoxi.mybatis.mysimple.util;
 
-import com.sun.xml.internal.messaging.saaj.soap.impl.FaultElementImpl;
 
-import javax.swing.text.StyledEditorKit;
-import java.awt.image.RescaleOp;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
 
